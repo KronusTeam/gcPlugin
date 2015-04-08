@@ -19,7 +19,7 @@ jQuery.fn.extend({
 	},
 	goTop: function(selector,content,src){
 		if (src === undefined)
-			src	=	"../../assets/img/top.png";
+			src	=	"http://kronusteam.com/public/img/top-black.png";
 		
 		$window = $(window);
 		var offsets = $(selector).offset();
@@ -27,7 +27,7 @@ jQuery.fn.extend({
 		var top = offsets.top+alto-(alto/2);
 
 		if(content === undefined){
-			content = "<img src='"+src+"' width='60px;' border='0' onclick='$(\""+selector+"\").moverScroll();'/>";
+			content = "<img src='"+src+"' width='60px;' border='0' onclick='$(\""+selector+"\").moveScroll();'/>";
 		}
 
 		$('<div></div>').attr('id', 'btnGoTop').css({
@@ -52,73 +52,70 @@ jQuery.fn.extend({
 		var now = new Date().getTime();
 		while(new Date().getTime() < now + sleepDuration){ }
 	},
-validarRut: function(boolAutoComplete,rutA){
-	var rut ="";
-	(boolAutoComplete===undefined)?boolAutoComplete=false:boolAutoComplete=true;
+	isValidRut: function(boolAutoComplete,rutA){
+		var rut ="";
+		(boolAutoComplete===undefined) ? boolAutoComplete = false : boolAutoComplete = true;
 
-	if(rutA===undefined)
-		rut = $(this).val();
-	else
-		rut =	rutA;
+		(rutA===undefined)? rut = $(this).val() : rut =	rutA;
 
-	var tmpstr = "";
-	for (i = 0; i < rut.length; i++)
-		if (rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-')
-			tmpstr = tmpstr + rut.charAt(i);
-		rut = tmpstr;
-		largo = rut.length;
-		
-		tmpstr = "";
-		for (i = 0; rut.charAt(i) == '0'; i++);
-			for (; i < rut.length; i++)
+		var tmpstr = "";
+		for (i = 0; i < rut.length; i++)
+			if (rut.charAt(i) != ' ' && rut.charAt(i) != '.' && rut.charAt(i) != '-')
 				tmpstr = tmpstr + rut.charAt(i);
 			rut = tmpstr;
 			largo = rut.length;
-		
-		if (largo < 2) {
-			return false;
-		}
-		for (i = 0; i < largo; i++) {
-			if (rut.charAt(i) != "0" && rut.charAt(i) != "1" && rut.charAt(i) != "2" && rut.charAt(i) != "3" && rut.charAt(i) != "4" && rut.charAt(i) != "5" && rut.charAt(i) != "6" && rut.charAt(i) != "7" && rut.charAt(i) != "8" && rut.charAt(i) != "9" && rut.charAt(i) != "k" && rut.charAt(i) != "K") {
+			
+			tmpstr = "";
+			for (i = 0; rut.charAt(i) == '0'; i++);
+				for (; i < rut.length; i++)
+					tmpstr = tmpstr + rut.charAt(i);
+				rut = tmpstr;
+				largo = rut.length;
+			
+			if (largo < 2) {
 				return false;
 			}
-		}
+			for (i = 0; i < largo; i++) {
+				if (rut.charAt(i) != "0" && rut.charAt(i) != "1" && rut.charAt(i) != "2" && rut.charAt(i) != "3" && rut.charAt(i) != "4" && rut.charAt(i) != "5" && rut.charAt(i) != "6" && rut.charAt(i) != "7" && rut.charAt(i) != "8" && rut.charAt(i) != "9" && rut.charAt(i) != "k" && rut.charAt(i) != "K") {
+					return false;
+				}
+			}
 
-		var invertido = "";
-		for (i = (largo - 1), j = 0; i >= 0; i--, j++)
-			invertido = invertido + rut.charAt(i);
-		var drut = "";
-		drut = drut + invertido.charAt(0);
-		drut = drut + '-';
-		cnt = 0;
-		for (i = 1, j = 2; i < largo; i++, j++) {
-			if (cnt == 3) {
-				drut = drut + '.';
-				j++;
-				drut = drut + invertido.charAt(i);
-				cnt = 1;
-			} else {
-				drut = drut + invertido.charAt(i);
-				cnt++;
+			var invertido = "";
+			for (i = (largo - 1), j = 0; i >= 0; i--, j++)
+				invertido = invertido + rut.charAt(i);
+			var drut = "";
+			drut = drut + invertido.charAt(0);
+			drut = drut + '-';
+			cnt = 0;
+			for (i = 1, j = 2; i < largo; i++, j++) {
+				if (cnt == 3) {
+					drut = drut + '.';
+					j++;
+					drut = drut + invertido.charAt(i);
+					cnt = 1;
+				} else {
+					drut = drut + invertido.charAt(i);
+					cnt++;
+				}
 			}
-		}
-		invertido = "";
-		for (i = (drut.length - 1), j = 0; i >= 0; i--, j++)
-			invertido = invertido + drut.charAt(i);
-		if (this.checkDV(rut)){
-			$(this).val(invertido);
-			return true;
-		}else{
-			if(!boolAutoComplete){
-				$(this).val('');
-				$(this).focus();
-				return false;
+			invertido = "";
+			for (i = (drut.length - 1), j = 0; i >= 0; i--, j++)
+				invertido = invertido + drut.charAt(i);
+			if (this.checkDV(rut)){
+				$(this).val(invertido);
+				return true;
 			}else{
-				var dv	=	this.getDV(true,rut);
-				rut+=dv;
-				this.validarRut(rut);
+				if(!boolAutoComplete){
+					$(this).val('');
+					$(this).focus();
+					return false;
+				}else{
+					var dv	=	this.getDV(true,rut);
+					rut+=dv;
+					this.isValidRut(rut);
+				}
 			}
-		}
 	},
 	checkDV: function(crut){
 		largo = crut.length;
@@ -186,7 +183,7 @@ validarRut: function(boolAutoComplete,rutA){
 		}
 		return dvr;
 	},
-	preCargarImagen:function(evt,selector) {
+	preLoadImage:function(evt,selector) {
 		var files = evt.target.files;
 		for (var i = 0, f; f = files[i]; i++) {
 
@@ -234,15 +231,17 @@ validarRut: function(boolAutoComplete,rutA){
         }
         return "";
     },
-    getFechaActual: function(formato){
+    getNowDate: function(format,separator){
+    	if (separator===undefined) separator = " / ";
+
     	var today = new Date();
     	var dd = today.getDate();
 		var mm = today.getMonth()+1;
 		var yyyy = today.getFullYear();
-		if(formato == "es")
-			return (dd+"/"+mm+"/"+yyyy);
+		if(format == "es")
+			return (dd + separator + mm + separator + yyyy);
 		else
-			return (yyyy + "/" + mm +"/" + dd);
+			return (yyyy + separator + mm +separator + dd);
 	},
 	getUrlVars: function () {
 		var vars = {};
@@ -251,38 +250,35 @@ validarRut: function(boolAutoComplete,rutA){
 		});
 		return vars;
 	},
-	validarTexto: function (string){
-		var texto;
+	isValidText: function (string){
+		var text;
 		if(string===undefined)
-			texto = $(this).val();
+			text = $(this).val();
 		else
-			texto = string;
+			text = string;
 
 		var pattern = /^[-_\w\.\ \u00e1\u00e9\u00ed\u00f3\u00fa\u00c1\u00c9\u00cd\u00d3\u00da\u00f1\u00d1\u00FC\u00DC]+$/;
 
-		if(pattern.test(texto)){
+		if(pattern.test(text)){
 			return true;
 		}else{
 			if(string===undefined){
-				alert("Debe ingresar un texto correcto");
 				$(this).val('');
 				$(this).focus();	
 			}
-			console.log("Debe ingresar un texto correcto");
 			return false;	
 		}
 	},
-	validarCorreo: function (string){
-		var correo;
+	isValidEmail: function (string){
+		var email;
 		if(string===undefined)
-			correo = $(this).val();
+			email = $(this).val();
 		else
-			correo = string;
+			email = string;
 
 		var pattern = /[\w-\.]{3,}@([\w-]{2,}\.)*([\w-]{2,}\.)[\w-]{2,10}/;
-		if(!pattern.test(correo)){
+		if(!pattern.test(email)){
 			if(string===undefined){
-				alert("Debe ingresar un correo correcto");
 				$(this).val("");
 				$(this).focus();
 			}
@@ -291,38 +287,22 @@ validarRut: function(boolAutoComplete,rutA){
 			return true;  
 		}
 	},
-	validarTelefono: function(string){
-		var numero;
-		if(string===undefined)
-			numero = $(this).val();
+	isValidPhone: function(string,format){
+		var phone;
+		if(string === undefined)
+			phone = $(this).val();
 		else
-			numero = string;
+			phone = string;
 		
-		var pattern= /[0-9]/;	
-		if(pattern.test(numero) && numero.length >= 8){
+		var pattern;
+
+		if(format === undefined) pattern = /[0-9]/;
+		if(format === 1) pattern = "/^\+?([0-9]{2})\)?[-. ]?([0-9]{4})$/";
+		
+		if(pattern.test(phone) && phone.length >= 8){
 			return true;  
 		}else{
 			if(string===undefined){
-				alert("Debe ingresar un telefono correcto");
-				$(this).val("");
-				$(this).focus();
-			}
-			return false;
-		}
-	},
-	validarNumeros: function(numbers){
-		var numero;
-		if (numbers === undefined)
-			numero = $(this).val();
-		else
-			numero = numbers;
-
-		var pattern= /[^0-9]/;	
-		if(!pattern.test(numero)){
-			return true;  
-		}else{
-			if (numbers === undefined) {
-				alert("Debe ingresar un solo numeros");
 				$(this).val("");
 				$(this).focus();
 			}
@@ -337,12 +317,16 @@ validarRut: function(boolAutoComplete,rutA){
 		if(!pattern.test(number)){
 			return true;  
 		}else{
+			if (numbers === undefined) {
+				$(this).val("");
+				$(this).focus();
+			}
 			return false;
 		}
 	},
-	buscador: function(texto,lista){
-		var pattern = new RegExp(texto.val(), "i");
-		lista.each(function(index,element){
+	searcher: function(toSearch,list){
+		var pattern = new RegExp(toSearch.val(), "i");
+		list.each(function(index,element){
 			if(!$(element).text().match(pattern)){
 				$(element).hide();
 			}else{
@@ -394,20 +378,20 @@ validarRut: function(boolAutoComplete,rutA){
 		}
 		return xmlDoc;
 	},
-	moverScroll: function(sumar,velocidad){
-		if(sumar === undefined){
-			sumar=0;	
+	moveScroll: function(add,speed){
+		if(add === undefined){
+			add=0;	
 		}
-		if(velocidad === undefined){
-			velocidad=400;
+		if(speed === undefined){
+			speed=400;
 		}
-		var st=$(this).offset().top + sumar;
+		var st=$(this).offset().top + add;
 		$("body,html").animate({
 			scrollTop: st
-		},velocidad,function(){  }
+		},speed,function(){  }
 		);	
 	},
-	relocate:function(url,parametros,target){
+	relocate:function(url,params,target){
 		if (target===undefined) {target ='_self';}
 		var body = document.body;
 		form=document.createElement('form'); 
@@ -415,32 +399,18 @@ validarRut: function(boolAutoComplete,rutA){
 		form.action = url;
 		form.name = 'jsform';
 		form.target = target;
-		for (index in parametros){
+		for (index in params){
 			var input = document.createElement('input');
 			input.type='hidden';
 			input.name=index;
 			input.id=index;
-			input.value=parametros[index];
+			input.value=params[index];
 			form.appendChild(input);
 		}	  		  			  
 		body.appendChild(form);
 		form.submit();
 	},
-	exportarTablaExcel: function (selectorIdTabla,nombreHojaExcel,selectorDivResultado,boolEliminarAccion) {
-		if(boolEliminarAccion===true){
-			var auxTabla = $(selectorDivResultado).html();
-
-			$("#accion1").remove();
-			$(".accion2").remove();
-		}
-		$(selectorIdTabla+" span").each(function(index,val){
-			$(this).text($(this).prop('title'));
-		});
-		var html = $(selectorIdTabla).html();
-		if(boolEliminarAccion===true){
-			$(selectorDivResultado).html(auxTabla);
-		}
-
+	cleanAccents:function(html){
 		while (html.indexOf('á') != -1) html = html.replace('á', '&aacute;');
 		while (html.indexOf('é') != -1) html = html.replace('é', '&eacute;');
 		while (html.indexOf('í') != -1) html = html.replace('í', '&iacute;');
@@ -468,25 +438,29 @@ validarRut: function(boolAutoComplete,rutA){
 		while (html.indexOf('Ò') != -1) html = html.replace('Ò', '&Ograve;');
 		while (html.indexOf('Ú') != -1) html = html.replace('Ú', '&Uacute;');
 		while (html.indexOf('Ù') != -1) html = html.replace('Ù', '&Ugrave;');
-		//tableToExcel("exportarTabla","Alumnos",html);
-		var ctx = {worksheet: nombreHojaExcel || 'Worksheet', table: html};
+		return html;
+	},
+	exportTableToExcel: function (selectorTableId,worksheetName,selectorOriginDiv,boolDeleteColumn) {
+		var tableAux;
+		if(boolDeleteColumn===true){
+			tableAux = $(selectorOriginDiv).html();
+
+			$("#toDelete").remove();
+			$(".toDelete").remove();
+		}
+
+		var html = $(selectorTableId).html();
+		if(boolDeleteColumn===true){
+			$(selectorOriginDiv).html(tableAux);
+		}
+		html 	=	this.cleanAccents(html);
+		
 		var uri = 'data:application/vnd.ms-excel;base64,';
 		template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>';
 		base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) };
 		format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) };
 
-		var ctx = {worksheet: nombreHojaExcel || 'Worksheet', table: html};
+		var ctx = {worksheet: worksheetName || 'Worksheet', table: html};
 		window.location.href = uri + base64(format(template, ctx));
 	},
-	//requiere plugins adicionales
-	//--DataTables http://datatables.net/
-	initTable: function(selector){
-		if(selector===undefined) selector ="tablita";
-
-		$('#'+selector).DataTable({
-			"language": {
-				"url": "//cdn.datatables.net/plug-ins/f2c75b7247b/i18n/Spanish.json"
-			}
-		});
-	}
 });
