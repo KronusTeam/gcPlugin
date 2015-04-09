@@ -1,7 +1,7 @@
 # gcPlugin
-gcPlugin es un plugin javascript basado en jquery, que contiene varias de las funciones más utilizadas, reduciendo el tiempo de que los desarrolladores utilizan en la busqueda de estas.
+gcPlugin es un plugin javascript basado en jquery, que contiene varias de las funciones más utilizadas, reduciendo el tiempo de que los desarrolladores utilizan en la búsqueda de estas.
 
->No todas las funciones fueron creadas por nosotros,sino son resultado de un largo proceso de busqueda de una funcion optima para cumplir con ese requisito y las cuales si muchas fueron modificadas.
+>No todas las funciones fueron creadas por nosotros,sino son resultado de un largo proceso de búsqueda de una función óptima para cumplir con ese requisito y las cuales si muchas fueron modificadas.
 
 ***
 ## Requerimientos
@@ -11,7 +11,7 @@ gcPlugin es un plugin javascript basado en jquery, que contiene varias de las fu
 ```
 
 ***
-## ¿Como utilizar?
+## ¿Cómo utilizar?
 Muy Simple, solo recuerda tener ya importado JQuery como lo mencionamos anteriormente, luego solo basta importar el archivo de gcPlugin.
 ```
  <script src="turuta/gcPlugin.js"></script>
@@ -69,14 +69,14 @@ $.fn.uiLock('<center><img src="loading.gif" /></center>'); //Adding html
 ### goTop
 Aparece un botón (imagen) flotante que permite volver al top del sitio. Este botón aparece solo cuando cierto elemento ya no es visible en pantalla por ejemplo el menú o logo superior.
 #### goTop - Parámetros
-+ selector - selector (#id o .clase) del elemento que servira como referencia para ocultar y mostrar el botón.
-+ src (opcional) - source path para el cambiar la imagen del botón flotante, para adaptarlo al estilo propio del sitio. por defecto es una flecha negra.
++ selector - selector (#id o .clase) del elemento que servirá como referencia para ocultar y mostrar el botón.
++ src (opcional) - source path para cambiar la imagen del botón flotante, para adaptarlo al estilo propio del sitio. por defecto es una flecha negra.
 
 #### Utilización
 ```
 $.fn.goTop("#logo"); // cuando ya no se vea el elemento #logo aparecera el botón para volver al top.
 o
-$.fn.goTop("#tuSelector"); // cuando ya no se vea el elemento #menu aparecera el botón para volver al top.
+$.fn.goTop("#tuSelector"); // cuando ya no se vea el elemento #menu aparecerá el botón para volver al top.
 ```
 Utilizando parámetros en goTop
 ```
@@ -97,9 +97,9 @@ $.fn.sleepFor(2000); // Duerme por 2 segundos.
 ```
 ***
 ### isValidRut (Chile)
-Valida si la es un rut valido, retornando true o false. Además da formato agregando puntos y guión independiente de la forma en que sea ingresado el rut.
+Valida si la es un rut válido, retornando true o false. Además da formato agregando puntos y guión independiente de la forma en que sea ingresado el rut.
 #### isValidRut - Parámetros
-+ boolAutoComplete - boolean (opcional - default = false). true para autocompletar el rut añadiendo automaticamente el digito verificador.
++ boolAutoComplete - boolean (opcional - default = false). true para autocompletar el rut añadiendo automaticamente el dígito verificador.
 + rutA - cadena (opcional). rut a validar (solo en caso de no llamarlo directo desde input)
 
 #### isValidRut - return
