@@ -115,6 +115,7 @@ if($("#inputTextCampoRut").isValidRut()){
 	console.log('Rut Invalido');
 }
 ```
+***
 ### getDV (Chile)
 retorna el digito verificador de un rut ingresado.
 #### getDV - Parámetros
@@ -127,15 +128,23 @@ retorna el digito verificador de un rut ingresado.
 ```
 var dv = $.fn.getDV('18923777');
 ```
-### preLoadImage (Chile)
+***
+### preLoadImage
 retorna el digito verificador de un rut ingresado.
 #### preLoadImage - Parámetros
-+ rut - cadena. Rut para obtener el digito verificador, sin puntos ni guión.
-
-#### preLoadImage - return
-+ número o k.
++ evt - evento change del input file.
++ selector - selector de destino para mostrar la imagen.
 
 #### Utilización
+HTML
 ```
-var dv = $.fn.getDV('18923777');
+<img id="imgSubir" title="subir"/>
+<input type="file" name="files[]" id="btnPrecargar"/>
+```
+
+Javascript
+```
+	$("#btnPrecargar").change(function(e){
+       preCargarImagen(e,"#imgSubir");
+    });
 ```

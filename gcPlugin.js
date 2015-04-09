@@ -26,7 +26,6 @@ jQuery.fn.extend({
 		var alto = $(selector).height();
 		var top = offsets.top+alto-(alto/2);
 
-		
 		var	content = "<img src='"+src+"' width='60px;' border='0' onclick='$(\""+selector+"\").moveScroll();'/>";
 		
 
