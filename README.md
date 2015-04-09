@@ -141,7 +141,6 @@ HTML
 <img id="imgSubir" title="subir"/>
 <input type="file" name="files[]" id="btnPrecargar"/>
 ```
-
 Javascript
 ```
 	$("#btnPrecargar").change(function(e){
