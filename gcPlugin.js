@@ -17,7 +17,7 @@ jQuery.fn.extend({
 
 		$('#uiLockId').remove();
 	},
-	goTop: function(selector,content,src){
+	goTop: function(selector,src){
 		if (src === undefined)
 			src	=	"http://kronusteam.com/public/img/top-black.png";
 		
@@ -26,9 +26,9 @@ jQuery.fn.extend({
 		var alto = $(selector).height();
 		var top = offsets.top+alto-(alto/2);
 
-		if(content === undefined){
-			content = "<img src='"+src+"' width='60px;' border='0' onclick='$(\""+selector+"\").moveScroll();'/>";
-		}
+		
+		var	content = "<img src='"+src+"' width='60px;' border='0' onclick='$(\""+selector+"\").moveScroll();'/>";
+		
 
 		$('<div></div>').attr('id', 'btnGoTop').css({
 			'position': 'fixed',
