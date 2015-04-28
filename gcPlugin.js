@@ -462,4 +462,18 @@ jQuery.fn.extend({
 		var ctx = {worksheet: worksheetName || 'Worksheet', table: html};
 		window.location.href = uri + base64(format(template, ctx));
 	},
+	getBrowser: function(){
+		var nav = navigator.userAgent.toLowerCase();
+	    if(nav.indexOf("msie") != -1){
+			return "IE";
+	    } else if(nav.indexOf("firefox") != -1){
+	    	return "Firefox";
+	    } else if(nav.indexOf("opera") != -1){
+	    	return "Opera";
+	    } else if(nav.indexOf("chrome") != -1){
+			return "Chrome";
+	    } else {
+	    	return "Desconosco";
+	    }
+	}
 });

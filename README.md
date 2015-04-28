@@ -147,3 +147,10 @@ Javascript
        preCargarImagen(e,"#imgSubir");
     });
 ```
+### getBrowser
+retorna el navegador utilizado.
+
+#### Utilización
+```
+	console.log($.fn.getBrowser());
+```
