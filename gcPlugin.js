@@ -200,6 +200,9 @@ jQuery.fn.extend({
 			reader.readAsDataURL(f);
 		}
 	},
+	capitalizeFirstLetter: function (string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	},
 	isValidDate: function (day,month,year){
 		var dteDate;
 
